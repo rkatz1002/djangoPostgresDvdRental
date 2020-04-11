@@ -30,3 +30,26 @@ def get_brute_amout_of_income(request):
         rows = dictfetchall(cursor)        
 
     return Response({'data':rows},status=200)
+
+
+@api_view(['POST'])
+def get_money_got_by_movie(request):
+
+    film_id = request.data['film_id']
+
+    raw_query = """
+        SELECT SUM(public.payment.amount) FROM payment
+        INNER JOIN rental
+        ON payment.rental_id = rental.rental_id
+        INNER JOIN inventory
+        ON inventory.inventory_id = rental.inventory_id
+        INNER JOIN film
+        ON inventory.film_id = film.film_id
+        WHERE film.film_id = %d
+    """%int(film_id)
+    
+    with connection.cursor() as cursor:
+        cursor.execute(raw_query)
+        rows = dictfetchall(cursor)        
+
+    return Response({'data':rows},status=200)
