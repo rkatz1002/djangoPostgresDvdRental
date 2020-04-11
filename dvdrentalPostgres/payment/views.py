@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from django.db import connection
+from film.models import *
 
 # Create your views here.
 
@@ -45,7 +46,7 @@ def get_money_got_by_movie(request):
         ON inventory.inventory_id = rental.inventory_id
         INNER JOIN film
         ON inventory.film_id = film.film_id
-        WHERE film.film_id = %d
+        WHERE film.film_id = %d;
     """%int(film_id)
     
     with connection.cursor() as cursor:
