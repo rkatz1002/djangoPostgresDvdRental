@@ -1,4 +1,4 @@
 \venv
 *.pyc
 dvdrentalPostgres/dvdrentalPostgres/settings.py
-*settings
+*settings.py
