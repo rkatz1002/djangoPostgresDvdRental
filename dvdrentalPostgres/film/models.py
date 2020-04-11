@@ -7,7 +7,6 @@ class Language(models.Model):
     last_update = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'language'
 
 class Film(models.Model):
@@ -15,7 +14,7 @@ class Film(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     release_year = models.IntegerField(blank=True, null=True)
-    language = models.ForeignKey('Language', models.DO_NOTHING)
+    language = models.ForeignKey(Language, models.DO_NOTHING)
     rental_duration = models.SmallIntegerField()
     rental_rate = models.DecimalField(max_digits=4, decimal_places=2)
     length = models.SmallIntegerField(blank=True, null=True)
@@ -26,7 +25,6 @@ class Film(models.Model):
     fulltext = models.TextField()  # This field type is a guess.
 
     class Meta:
-        managed = False
         db_table = 'film'
 
 class Actor(models.Model):
@@ -36,7 +34,6 @@ class Actor(models.Model):
     last_update = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'actor'
 
 class FilmActor(models.Model):
@@ -45,9 +42,7 @@ class FilmActor(models.Model):
     last_update = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'film_actor'
-        unique_together = (('actor', 'film'),)
 
 class Category(models.Model):
     category_id = models.AutoField(primary_key=True)
@@ -55,7 +50,6 @@ class Category(models.Model):
     last_update = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'category'
 
 class FilmCategory(models.Model):
@@ -64,9 +58,7 @@ class FilmCategory(models.Model):
     last_update = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'film_category'
-        unique_together = (('film', 'category'),)
 
 
 
