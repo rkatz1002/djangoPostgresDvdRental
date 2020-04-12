@@ -10,6 +10,9 @@ class Language(models.Model):
     class Meta:
         db_table = 'language'
 
+    def __str__(self):
+        return self.name 
+
 class Film(models.Model):
     film_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
@@ -82,4 +85,4 @@ class Inventory(models.Model):
         db_table = 'inventory'
     
     def __str__(self):
-        return self.film
+        return self.film.title

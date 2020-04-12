@@ -17,7 +17,7 @@ class Rental(models.Model):
     class Meta:
         db_table = 'rental'
     def __str__(self):
-        return self.return_date
+        return str(self.return_date)
 
 class Payment(models.Model):
     payment_id = models.AutoField(primary_key=True)
@@ -29,5 +29,6 @@ class Payment(models.Model):
 
     class Meta:
         db_table = 'payment'
+
     def __str__(self):
-        return self.customer
+        return self.customer.first_name + '/' + str(self.payment_date)

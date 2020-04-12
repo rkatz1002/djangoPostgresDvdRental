@@ -2,9 +2,8 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import *
+from .models import Rental, Payment
 
 
-admin.site.register(Inventory)
 admin.site.register(Rental)
 admin.site.register(Payment)
