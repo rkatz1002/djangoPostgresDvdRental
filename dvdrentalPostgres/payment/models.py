@@ -1,6 +1,8 @@
 from django.db import models
-from customer.models import *
-from stores.models import *
+from customer.models import Customer
+from film.models import Inventory
+from staff.models import Staff
+
 # Create your models here.
 
 class Rental(models.Model):
@@ -14,7 +16,8 @@ class Rental(models.Model):
 
     class Meta:
         db_table = 'rental'
-
+    def __str__(self):
+        return self.return_date
 
 class Payment(models.Model):
     payment_id = models.AutoField(primary_key=True)
@@ -26,3 +29,5 @@ class Payment(models.Model):
 
     class Meta:
         db_table = 'payment'
+    def __str__(self):
+        return self.customer

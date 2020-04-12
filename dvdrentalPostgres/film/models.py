@@ -1,4 +1,5 @@
 from django.db import models
+from staff.models import Staff
 
 # Create your models here.
 class Language(models.Model):
@@ -27,6 +28,9 @@ class Film(models.Model):
     class Meta:
         db_table = 'film'
 
+    def __str__(self):
+        return self.title    
+
 class Actor(models.Model):
     actor_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=45)
@@ -35,6 +39,9 @@ class Actor(models.Model):
 
     class Meta:
         db_table = 'actor'
+
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name  
 
 class FilmActor(models.Model):
     actor = models.OneToOneField(Actor, models.DO_NOTHING, primary_key=True)
@@ -51,6 +58,9 @@ class Category(models.Model):
 
     class Meta:
         db_table = 'category'
+    
+    def __str__(self):
+        return self.name
 
 class FilmCategory(models.Model):
     film = models.OneToOneField(Film, models.DO_NOTHING, primary_key=True)
@@ -62,4 +72,14 @@ class FilmCategory(models.Model):
 
 
 
+class Inventory(models.Model):
+    inventory_id = models.AutoField(primary_key=True)
+    film = models.ForeignKey(Film, models.DO_NOTHING)
+    store_id = models.SmallIntegerField()
+    last_update = models.DateTimeField()
 
+    class Meta:
+        db_table = 'inventory'
+    
+    def __str__(self):
+        return self.film

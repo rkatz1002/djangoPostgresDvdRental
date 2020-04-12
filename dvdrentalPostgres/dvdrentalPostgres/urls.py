@@ -21,6 +21,6 @@ from film.urls import urlpatterns as urlpatterns_film
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('film/', include(urlpatterns_film)),
-    path('payment/', include(urlpatterns_payment)),
+    # path('film/', include(urlpatterns_film)),
+    # path('payment/', include(urlpatterns_payment)),
 ]
