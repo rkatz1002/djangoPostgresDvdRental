@@ -28,6 +28,8 @@ This database isn't so perfect and lacks some columns to adapt it do django user
 
 `ALTER TABLE staff ALTER COLUMN password TYPE varchar(500);`
 
+`ALTER TABLE staff ADD COLUMN is_staff BOOLEAN`;
+
 `UPDATE staff SET is_staff='t';`
 
 ### Install all files in requirements.txt
@@ -42,10 +44,21 @@ Make sure that, before you make your migrations, you migrate the database to get
 
 `python manage.py migrate`
 
+Before you do this, make sure you __comment the following apps__ in your _settings_ file: 
+
+- customer
+- film
+- payment
+- stores
+- staff
+
 ### Migrate all tables
 
 After you've migrated django's tables, you can migrate your new database:
 
 `python manage.py makemigrations`
-`python manage.py migrate`
+
+`python manage.py migrate --fake`
+
+You use the --fake suffix because the database was already created.
 

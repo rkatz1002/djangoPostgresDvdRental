@@ -15,12 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from payment.urls import urlpatterns as urlpatterns_payment
-from film.urls import urlpatterns as urlpatterns_film
 
+try:
+    from payment.urls import urlpatterns as urlpatterns_payment
+    from film.urls import urlpatterns as urlpatterns_film
+except: 
+    pass
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    # path('film/', include(urlpatterns_film)),
-    # path('payment/', include(urlpatterns_payment)),
-]
+try:
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('film/', include(urlpatterns_film)),
+        path('payment/', include(urlpatterns_payment)),
+    ]
+except:
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+    ]

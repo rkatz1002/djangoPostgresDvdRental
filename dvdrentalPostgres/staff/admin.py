@@ -55,16 +55,22 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('first_name', 'last_name', 'email')
     list_filter = ('first_name',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('date_of_birth',)}),
-        ('Permissions', {'fields': ('is_admin',)}),
+        ('Work Info', {'fields': ('username', 'last_login')}),
+        ('Personal info', {'fields': ('first_name','last_name','email','address')}),
+        ('Permissions', {'fields': ('is_admin','is_staff')}),
     )
     search_fields = ('first_name',)
     ordering = ('first_name',)
     filter_horizontal = ()
-    
+
+class AdressAdmin(admin.ModelAdmin):
+     list_display = ('address', 'district', 'city')
+
+class CityAdmin(admin.ModelAdmin):
+     list_display = ('city', 'country')
+
 admin.site.register(Staff, UserAdmin)
 admin.site.unregister(Group)
-admin.site.register(Address)
-admin.site.register(City)
+admin.site.register(Address, AdressAdmin)
+admin.site.register(City, CityAdmin)
 admin.site.register(Country)
